@@ -1,0 +1,3 @@
+connexion[swagger-ui,uvicorn]
+mariadb
+argon2-cffi

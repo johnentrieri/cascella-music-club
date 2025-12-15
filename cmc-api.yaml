@@ -1,0 +1,568 @@
+openapi: 3.0.0
+info:
+  title: Cascella Music Club
+  description: Cascella Music Club API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local Development Server
+tags:
+  - name: user
+    description: User operations
+  - name: userkey
+    description: User Key operations
+  - name: discussion
+    description: Discussion operations
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Register New User
+      operationId: api.user.addUser
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+    get:
+      tags:
+        - user
+      summary: Get All Users
+      operationId: api.user.getUsers
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 10
+                    username:
+                      type: string
+                      example: "user01"
+        '400':
+          description: Bad Request
+    put:
+      tags:
+        - user
+      summary: Update Logged In User
+      operationId: api.user.updateUser
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - basic_auth: []
+    delete:
+      tags:
+        - user
+      summary: Delete Logged In User
+      operationId: api.user.deleteUser
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - basic_auth: []
+  /userkey:
+    post:
+      tags:
+          - userkey
+      summary: Generate New User Key
+      operationId: api.user.addUserKey
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserKey'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - admin_auth: []
+    get:
+      tags:
+          - userkey
+      summary: Get All User Keys
+      operationId: api.user.getUserKeys
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserKey'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - admin_auth: []
+  /discussion:
+    post:
+      tags:
+        - discussion
+      summary: Create a New Discussion
+      operationId: api.discussion.addDiscussion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discussion'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - admin_auth: []
+    get:
+      tags:
+        - discussion
+      summary: Get All Discussions
+      operationId: api.discussion.getDiscussions
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 10
+                    start_date:
+                      type: string
+                      format: date
+                      example: "2025-10-01"
+                    end_date:
+                      type: string
+                      format: date
+                      example: "2025-10-31"
+                    curator:
+                      type: string
+                      example: "user01"
+                    artist:
+                      type: string
+                      example: "Breaking Benjamin"
+        '400':
+          description: Bad Request
+  /discussion/{discussionId}:    
+    get:
+      tags:
+        - discussion
+      summary: Get Discussion By ID
+      operationId: api.discussion.getDiscussionById
+      parameters:
+        - name: discussionId
+          in: path
+          description: Discussion ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discussion'
+        '400':
+          description: Bad Request
+  /discussion/{discussionId}/comment:
+    post:
+      tags:
+        - discussion
+      summary: Comment on an Artist
+      operationId: api.discussion.addArtistComment
+      parameters:
+        - name: discussionId
+          in: path
+          description: Discussion ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - basic_auth: []
+  /discussion/{discussionId}/{songId}/comment:
+    post:
+      tags:
+        - discussion
+      summary: Comment on a Song
+      operationId: api.discussion.addSongComment
+      parameters:
+        - name: discussionId
+          in: path
+          description: Discussion ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: songId
+          in: path
+          description: Song ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - basic_auth: []
+  /discussion/{discussionId}/rate:
+    post:
+      tags:
+        - discussion
+      summary: Rate an Artist
+      operationId: api.discussion.addArtistRating
+      parameters:
+        - name: discussionId
+          in: path
+          description: Discussion ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Rating'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - basic_auth: []
+  /discussion/{discussionId}/{songId}/rate:
+    post:
+      tags:
+        - discussion
+      summary: Rate a Song
+      operationId: api.discussion.addSongRating
+      parameters:
+        - name: discussionId
+          in: path
+          description: Discussion ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: songId
+          in: path
+          description: Song ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Rating'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - basic_auth: []
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - userkey
+        - username
+        - email
+        - password
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        join_date:
+          type: string
+          format: date-time
+          example: "2025-12-25T08:30:00Z"
+          readOnly: true
+        userkey:
+          type: string
+          example: abcd1234efgh5678
+          writeOnly: true
+        username:
+          type: string
+          example: user01
+          minLength: 4
+        email:
+          type: string
+          example: user01@email.com
+          format: email
+          writeOnly: true
+        password:
+          type: string
+          example: 'password123!'
+          writeOnly: true
+          format: password
+          minLength: 4
+    UserKey:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        userkey:
+          type: string
+          example: abcd1234efgh5678
+          readOnly: true
+        is_claimed:
+          type: boolean
+          example: true
+          readOnly: true
+        claimed_by:
+          type: string
+          example: "user01"
+        created_on:
+          type: string
+          format: date-time
+          example: "2025-12-25T08:30:00Z"
+          readOnly: true
+    Discussion:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        created_on:
+          type: string
+          format: date-time
+          example: "2025-12-25T08:30:00Z"
+          readOnly: true
+        start_date:
+          type: string
+          format: date
+          example: "2025-10-01"
+        end_date:
+          type: string
+          format: date
+          example: "2025-10-31"
+        curator:
+          type: string
+          example: "user01"
+        artist:
+          $ref: '#/components/schemas/ArtistEntry'
+        songs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SongEntry'
+    ArtistEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        created_on:
+          type: string
+          format: date-time
+          example: "2025-12-25T08:30:00Z"
+          readOnly: true
+        discussion_id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        name:
+          type: string
+          example: "Breaking Benjamin"
+        genre:
+          type: string
+          example: "Rock"
+        img_url:
+          type: string
+          example: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Breaking_Benjamin_2-14-15.jpg/330px-Breaking_Benjamin_2-14-15.jpg"
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+        ratings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rating'
+    SongEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        created_on:
+          type: string
+          format: date-time
+          example: "2025-12-25T08:30:00Z"
+          readOnly: true
+        discussion_id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        artist_id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        name:
+          type: string
+          example: "The Diary of Jane"
+        album:
+          type: string
+          example: "Phobia"
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+        ratings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rating'
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        created_on:
+          type: string
+          format: date-time
+          example: "2025-12-25T08:30:00Z"
+          readOnly: true
+        discussion_id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        song_id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        author:
+          type: string
+          example: "user01"
+          readOnly: true
+        comment:
+          type: string
+          example: "I love this song!"
+    Rating:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        created_on:
+          type: string
+          format: date-time
+          example: "2025-12-25T08:30:00Z"
+          readOnly: true
+        discussion_id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        song_id:
+          type: integer
+          format: int64
+          example: 10
+          readOnly: true
+        author:
+          type: string
+          example: "user01"
+          readOnly: true
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 10
+          example: 10
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
+      x-basicInfoFunc: api.security.basic_auth
+    admin_auth:
+      type: http
+      scheme: basic
+      x-basicInfoFunc: api.security.admin_auth
