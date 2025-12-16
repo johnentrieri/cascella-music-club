@@ -2,6 +2,35 @@ from server import db
 from .security import create_hash
 import random,string
 
+def login(user):
+  try:
+    connection = db.connection_pool.get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    # Get User
+    user_id = user['id']
+    sql_query = f"""
+      SELECT
+        id,
+        join_date,
+        is_admin,
+        username
+      FROM 
+        users
+      WHERE
+        id = {user_id};
+    """
+    cursor.execute(sql_query)
+    data = cursor.fetchone()
+    if data == None:
+      return "User Not Found", 400
+    return data, 200
+  except Exception as e:
+    print(f"Error: {e}")
+    return "Database Error", 500
+  finally:
+    if connection:
+      connection.close()
 def addUser(body):
   try:
     connection = db.connection_pool.get_connection()

@@ -1,0 +1,15 @@
+#admin-panel {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+#admin-panel th {
+  font-size: 1.0em;
+}
+
+#admin-panel td {
+  font-size: 0.9em;
+}

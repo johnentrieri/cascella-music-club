@@ -87,6 +87,25 @@ paths:
           description: Unauthorized
       security:
         - basic_auth: []
+  /user/login:
+    get:
+      tags:
+        - user
+      summary: Login User
+      operationId: api.user.login
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+        - basic_auth: []
   /userkey:
     post:
       tags:
@@ -349,6 +368,10 @@ components:
           type: string
           format: date-time
           example: "2025-12-25T08:30:00Z"
+          readOnly: true
+        is_admin:
+          type: boolean
+          example: false
           readOnly: true
         userkey:
           type: string

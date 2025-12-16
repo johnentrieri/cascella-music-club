@@ -1,0 +1,31 @@
+#account-btn-container {
+  justify-content: right;
+  display: flex;
+}
+
+#account-btn-container button{
+  margin-top: 4px;
+}
+
+#navbar ul {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  list-style-type: none;
+  padding: 0;
+}
+
+#navbar li {
+  display: inline;
+  margin: 4px;
+}
+
+#navbar a {
+  text-decoration: none;
+  font-size: 0.8em;
+  color: white;
+}
+
+#navbar .active {
+  font-weight: bold;
+}

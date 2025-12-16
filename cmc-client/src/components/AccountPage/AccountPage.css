@@ -1,0 +1,51 @@
+#account {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#account button {
+  width: 100px;
+  margin: 4px;
+}
+
+#account #cancel-btn {
+  background-color: rgb(102, 32, 32);
+  margin-top: 20px;
+  width: 150px;
+  height: 30px;
+}
+
+#login-form {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+#profile {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+#profile p {
+  margin: 0;
+  margin-top:10px;
+}
+
+#login-form p {
+  margin: 0;
+  margin-top:10px;
+}
+
+#login-form input {
+  width: 200px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  padding: 6px;
+  text-align: center;
+}

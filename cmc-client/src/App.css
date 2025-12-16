@@ -1,0 +1,76 @@
+#root {
+  max-width: 1900px;
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.error-msg {
+  width: 240px;
+  margin: 10px auto;
+  border-radius: 8px;
+  background-color:rgba(212, 69, 69, 0.788)
+}
+
+button {
+  background-color: #524f4f;
+  border-radius: 8px;
+  border: 1px solid gray;
+  display: flex;
+  align-items: center; /* Centers icon & text vertically */
+  justify-content: center; /* Centers icon & text horizontally */
+  gap: 8px; /* Space between icon and text */
+  padding: 4px 8px;
+}
+
+input {
+  border-radius: 8px;
+  border: 1px solid gray;
+  padding: 6px;
+  text-align: center;
+}
+
+.flex-new-line {
+  width:0;
+  height:0;
+  padding: 0;
+  margin: 0;
+  flex-basis: 100%;
+}
+
+
+table{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  border: 1px solid rgb(60, 60, 60)
+}
+
+table thead {
+  background-color: rgb(70, 70, 70);
+}
+
+table th,td {
+  padding: 6px;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: rgb(88, 88, 88);
+}
+
+table tbody tr:nth-child(even) {
+  background-color: rgb(100, 100, 100);
+}
+
+/* Hide on mobile (screens up to 767px) */
+@media (max-width: 767px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
