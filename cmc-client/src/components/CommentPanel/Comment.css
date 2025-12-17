@@ -1,0 +1,9 @@
+.comment {
+  font-size: 0.8em;
+  width: 90%;
+  text-align: left;
+  padding: 6px;
+  border: 1px solid gray;
+  border-radius: 2px;
+  margin: 2px auto;
+}

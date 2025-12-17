@@ -11,10 +11,17 @@ h1 {
 }
 
 .error-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 240px;
-  margin: 10px auto;
+  padding: 10px;
   border-radius: 8px;
   background-color:rgba(212, 69, 69, 0.788)
+}
+
+.error-msg p {
+  margin: 0;
 }
 
 button {
@@ -29,6 +36,13 @@ button {
 }
 
 input {
+  border-radius: 8px;
+  border: 1px solid gray;
+  padding: 6px;
+  text-align: center;
+}
+
+select {
   border-radius: 8px;
   border: 1px solid gray;
   padding: 6px;

@@ -1,0 +1,29 @@
+#discussion-panel {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+.discussion-card {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+.discussion-card h1 {
+  flex-basis: 100%;
+  margin-bottom: 4px;
+}
+
+.discussion-card p {
+  flex-basis: 100%;
+  margin-top: 0px;
+}
+
+.discussion-card button {
+  width: 200px;
+}

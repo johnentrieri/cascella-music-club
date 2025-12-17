@@ -1,0 +1,27 @@
+.song-tile {
+  background-color: rgb(46, 46, 46);
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  max-width: 800px;
+}
+.song-tile-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding: 4px;
+  margin: 0 0;
+}
+
+.song-tile-header p {
+  margin: 0;
+}
+
+.song-tile-header button {
+  padding: 4px;
+  width: 80px;
+}

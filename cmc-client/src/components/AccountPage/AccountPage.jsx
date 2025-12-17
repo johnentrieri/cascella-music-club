@@ -163,6 +163,10 @@ export default function AccountPage({onPageChange, onLoginSuccess, onLogout, use
           <p>{errorMessage}</p>
         </div>
       }
+
+      <button id="cancel-btn" onClick={ ()=>onPageChange('this-week') }>
+        Return
+      </button>
       
       { isLoggedIn ?
 
@@ -272,12 +276,9 @@ export default function AccountPage({onPageChange, onLoginSuccess, onLogout, use
 
           <button onClick={handleRegisterAttempt}>Register</button>
 
-        </div>
-        
+        </div>        
       }
-      <button id="cancel-btn" onClick={ ()=>onPageChange('this-week') }>
-        Cancel
-      </button>
+      
     </div>
   )
 }

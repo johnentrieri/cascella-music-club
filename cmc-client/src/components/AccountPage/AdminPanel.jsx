@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import './AdminPanel.css';
 import { generateUserKey, getUserKeys } from '../../utils/cmc-api';
+import DiscussionAdder from './DiscussionAdder';
 
 export default function AdminPanel({authHeader}) {
 
@@ -113,6 +114,10 @@ export default function AdminPanel({authHeader}) {
         </div>
       }
 
+      <div className='flex-new-line' />
+      <DiscussionAdder authHeader={authHeader}/>
+      <div className='flex-new-line' />
+      
       <div className='flex-new-line' />
       <button onClick={() => setIsRefreshNeeded(true)}>Refresh Keys</button>       
       <div className='flex-new-line' />

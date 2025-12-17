@@ -1,6 +1,10 @@
 #admin-panel {
+  background-color: rgb(46, 46, 46);
   display: flex;
   flex-basis: 100%;
+  max-width: 400px;
+  border: 1px solid gray;
+  border-radius: 8px;
   flex-wrap: wrap;
   justify-content: center;
   gap: 4px;

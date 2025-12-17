@@ -1,0 +1,31 @@
+.comment-panel {
+  background-color: rgb(61, 61, 61);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 10px 0;
+  margin: 0 0;
+}
+
+.comment-input {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.comment-input input {
+  width: 220px;
+  height: 60px;
+  text-align: left;
+}
+
+.comment-input button{
+  background-color: rgb(43, 80, 82);
+  width: 120px;
+}

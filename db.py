@@ -125,7 +125,7 @@ def create_song_table():
     CREATE TABLE IF NOT EXISTS songs (
       id INT AUTO_INCREMENT PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
-      album VARCHAR(255) NOT NULL,
+      album VARCHAR(255),
       created_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
       artist INT,
       discussion INT,
