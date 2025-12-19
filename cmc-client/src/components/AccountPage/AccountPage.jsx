@@ -164,6 +164,8 @@ export default function AccountPage({onPageChange, onLoginSuccess, onLogout, use
         </div>
       }
 
+      <div className='flex-new-line' />
+
       <button id="cancel-btn" onClick={ ()=>onPageChange('this-week') }>
         Return
       </button>

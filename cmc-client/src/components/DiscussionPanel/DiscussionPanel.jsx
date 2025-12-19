@@ -80,6 +80,8 @@ export default function DiscussionPanel({authHeader, discussionId}) {
         </div>
       }
       
+      <div className='flex-new-line' />
+
       { discussionData &&
 
         <div className="discussion-card">

@@ -82,6 +82,8 @@ export default function PreviousWeeksPage({authHeader}) {
         </div>
       }
 
+      <div className='flex-new-line' />
+
       <select value={selectedDiscussionId} onChange={(event) => setSelectedDiscussionId(event.target.value)}>
         {pastDiscussionDropdown}
       </select>
