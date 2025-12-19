@@ -5,6 +5,7 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
+  max-width: 800px;
   padding: 10px 0;
   margin: 0 0;
 }
@@ -19,6 +20,10 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.rating-input input{
+  width: 80px;
 }
 
 .rating-input button{

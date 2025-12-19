@@ -17,6 +17,7 @@ export default function DiscussionAdder({authHeader}) {
   const [endDate,setEndDate] = useState(getWeekEnd());
   const [artist,setArtist] = useState('');
   const [genre,setGenre] = useState('');
+  const [imgUrl,setImgUrl] = useState('');
   const [curator,setCurator] = useState('');
   const [popSong1,setPopSong1] = useState('');
   const [popSong2,setPopSong2] = useState('');
@@ -108,7 +109,7 @@ export default function DiscussionAdder({authHeader}) {
       artist : {
         name : artist,
         genre : genre,
-        img_url: "",
+        img_url: imgUrl,
         comments: [],
         ratings: [],
       },
@@ -213,7 +214,7 @@ export default function DiscussionAdder({authHeader}) {
   })
 
   // Add Empty Option
-  userDropdown.unshift(<option key='0' value=''></option>)
+  userDropdown.unshift(<option key='0' value=''>Select User</option>)
 
   return (
     <div id="discussion-adder">
@@ -269,6 +270,19 @@ export default function DiscussionAdder({authHeader}) {
         value={genre}
         onChange={(event) => setGenre(event.target.value)}
       />
+
+      <div className='flex-new-line' />
+
+      <input
+        type='text'
+        placeholder='Image URL'
+        value={imgUrl}
+        onChange={(event) => setImgUrl(event.target.value)}
+      />
+
+      <div className='flex-new-line' />
+
+      <img className="artist-img" src={imgUrl} />
 
       <div className='flex-new-line' />
 

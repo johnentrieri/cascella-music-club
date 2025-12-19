@@ -69,7 +69,7 @@ export default function PreviousWeeksPage({authHeader}) {
   })
 
   // Add Empty Option
-  pastDiscussionDropdown.unshift(<option key='0' value=''></option>)
+  pastDiscussionDropdown.unshift(<option key='0' value=''>Select a Discussion</option>)
 
   return (
     <div id="prev-week">

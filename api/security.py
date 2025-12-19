@@ -13,9 +13,9 @@ def basic_auth(username,password):
       password
     FROM
       users
-    WHERE username = '{username}';
+    WHERE username = ?;
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[username])
     data = cursor.fetchone()
     db_hash = data['password']
     db_id = data['id'] 
@@ -41,9 +41,9 @@ def admin_auth(username,password):
       password
     FROM
       users
-    WHERE username = '{username}' AND is_admin = 1;
+    WHERE username = ? AND is_admin = 1;
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[username])
     db_hash = cursor.fetchone()['password']
     ph.verify(db_hash,password)
     return({"sub" : username})

@@ -44,9 +44,9 @@ def addUser(body):
       FROM
         userkeys
       WHERE
-        userkey = '{userkey}' AND is_claimed = 0;
+        userkey = ? AND is_claimed = 0;
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[userkey])
     userkeyId = cursor.fetchone()
     if userkeyId == None:
       return "User Key Not Found", 400
@@ -60,13 +60,9 @@ def addUser(body):
         username,
         email,
         password
-      ) VALUES (
-        '{username}',
-        '{email}',
-        '{password}'
-      )
+      ) VALUES (?,?,?);
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[username,email,password])
     response = cursor.rowcount
     if response < 1:
       return "Database Error", 500
@@ -84,11 +80,11 @@ def addUser(body):
         userkeys
       SET
         is_claimed = 1,
-        claimed_by = {last_insert_id}
+        claimed_by = ?
       WHERE
-        userkey = '{userkey}';
+        userkey = ?;
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[last_insert_id,userkey])
     response = cursor.rowcount
     if response < 1:
       return "Database Error", 500
@@ -144,11 +140,9 @@ def addUserKey():
     sql_query = f"""
       INSERT INTO userkeys (
         userkey
-      ) VALUES (
-        '{random_string}'
-      )
+      ) VALUES (?);
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[random_string])
     response = cursor.rowcount
     if response < 1:
       return "Database Error", 500

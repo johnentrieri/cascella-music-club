@@ -57,6 +57,12 @@ select {
   flex-basis: 100%;
 }
 
+.artist-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px solid gray;
+}
 
 table{
   text-align: center;

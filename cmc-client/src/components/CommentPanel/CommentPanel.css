@@ -7,6 +7,7 @@
   width: 100%;
   padding: 10px 0;
   margin: 0 0;
+  max-width: 800px;
 }
 
 .comment-input {
@@ -17,12 +18,14 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
+  width: 100%;
 }
 
-.comment-input input {
-  width: 220px;
-  height: 60px;
+.comment-input textarea {
+  flex-basis: 90%;
+  height: 100px;
   text-align: left;
+  border-radius: 8px;
 }
 
 .comment-input button{

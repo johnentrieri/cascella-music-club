@@ -86,6 +86,12 @@ export default function DiscussionPanel({authHeader, discussionId}) {
 
           <h1>{discussionData.artist.name}</h1>
 
+          <div className='flex-new-line' />
+
+          <img className="artist-img" src={discussionData.artist.img_url} />
+
+          <div className='flex-new-line' />
+
           <p>Curated By: {discussionData.curator}</p>
 
           <button onClick={()=> setShowRatingPanel(!showRatingPanel)}>

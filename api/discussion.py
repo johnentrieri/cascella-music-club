@@ -13,9 +13,9 @@ def addDiscussion(body):
       FROM
         users
       WHERE
-        username = '{curator_username}';
+        username = ?;
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[curator_username])
     curator_id = cursor.fetchone()['id']
     if curator_id == None:
       return "Curator Not Found", 400
@@ -28,13 +28,9 @@ def addDiscussion(body):
         start_date,
         end_date,
         curator
-      ) VALUES (
-        '{start_date}',
-        '{end_date}',
-        {curator_id}
-      );
+      ) VALUES (?,?,?);
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[start_date,end_date,curator_id])
     response = cursor.rowcount
     if response < 1:
       return "Database Error", 500
@@ -57,14 +53,9 @@ def addDiscussion(body):
         genre,
         img_url,
         discussion
-      ) VALUES (
-        '{artist_name}',
-        '{artist_genre}',
-        '{artist_img}',
-        {discussion_id}
-      );
+      ) VALUES (?,?,?,?);
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[artist_name,artist_genre,artist_img,discussion_id])
     response = cursor.rowcount
     if response < 1:
       return "Database Error", 500
@@ -87,14 +78,9 @@ def addDiscussion(body):
           album,
           artist,
           discussion
-        ) VALUES (
-          '{song_name}',
-          '{song_album}',
-          {artist_id},
-          {discussion_id}
-        );
+        ) VALUES (?,?,?,?);
       """
-      cursor.execute(sql_query)
+      cursor.execute(sql_query,[song_name,song_album,artist_id,discussion_id])
       response = cursor.rowcount
       if response < 1:
         return "Database Error", 500
@@ -157,9 +143,9 @@ def getDiscussionById(discussionId):
       JOIN
         users as u ON u.id = d.curator
       WHERE
-        d.id = {discussion_id}
+        d.id = ?
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[discussion_id])
     discussion_data = cursor.fetchone()
     if discussion_data == None:
       return "Discussion Not Found", 400    
@@ -176,9 +162,9 @@ def getDiscussionById(discussionId):
       FROM 
         artists
       WHERE
-        discussion = {discussion_id}
+        discussion = ?
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[discussion_id])
     artist_data = cursor.fetchone()
     if artist_data == None:
       return "Artist Not Found", 400
@@ -198,9 +184,9 @@ def getDiscussionById(discussionId):
       FROM 
         songs
       WHERE
-        discussion = {discussion_id}
+        discussion = ?
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[discussion_id])
     song_data = cursor.fetchall()
     if song_data == None:
       return "No Songs Found", 400
@@ -223,13 +209,11 @@ def getDiscussionById(discussionId):
       JOIN
         users as u ON u.id = c.author
       WHERE
-        discussion = {discussion_id}
+        discussion = ?
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[discussion_id])
     comment_data = cursor.fetchall()
     
-    # TODO - Sort Comments by Datetime
-
     # Add Artist Comments
     for comment in comment_data:
       if comment['song_id'] == None:
@@ -255,13 +239,11 @@ def getDiscussionById(discussionId):
       JOIN
         users as u ON u.id = r.author
       WHERE
-        discussion = {discussion_id}
+        discussion = ?
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[discussion_id])
     rating_data = cursor.fetchall()
     
-    # TODO - Sort Ratings by Datetime?
-
     # Add Artist Ratings
     for rating in rating_data:
       if rating['song_id'] == None:
@@ -295,13 +277,9 @@ def addArtistComment(user,discussionId,body):
         comment,
         author,
         discussion
-      ) VALUES (
-        '{comment}',
-        {author_id},
-        {discussion_id}
-      );
+      ) VALUES (?, ?, ?);
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[comment,author_id,discussion_id])
     response = cursor.rowcount
     if response < 1:
       return "Database Error", 500
@@ -333,14 +311,9 @@ def addSongComment(user,discussionId,songId,body):
         author,
         discussion,
         song
-      ) VALUES (
-        '{comment}',
-        {author_id},
-        {discussion_id},
-        {song_id}
-      );
+      ) VALUES (?,?,?,?);
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[comment,author_id,discussion_id,song_id])
     response = cursor.rowcount
     if response < 1:
       return "Database Error", 500
@@ -370,13 +343,13 @@ def addArtistRating(user,discussionId,body):
       FROM
         ratings
       WHERE
-        author = {author_id}
+        author = ?
       AND
-        discussion = {discussion_id}
+        discussion = ?
       AND
         song IS NULL;
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[author_id,discussion_id])
     data = cursor.fetchall()
     if len(data) > 0:
       return "User Rating Exists", 400
@@ -388,13 +361,9 @@ def addArtistRating(user,discussionId,body):
         rating,
         author,
         discussion
-      ) VALUES (
-        {rating},
-        {author_id},
-        {discussion_id}
-      );
+      ) VALUES (?,?,?);
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[rating,author_id,discussion_id])
     response = cursor.rowcount
     if response < 1:
       return "Database Error", 500
@@ -425,13 +394,13 @@ def addSongRating(user,discussionId,songId,body):
       FROM
         ratings
       WHERE
-        author = {author_id}
+        author = ?
       AND
-        discussion = {discussion_id}
+        discussion = ?
       AND
-        song = {song_id};
+        song = ?;
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[author_id,discussion_id,song_id])
     data = cursor.fetchall()
     if len(data) > 0:
       return "User Rating Exists", 400
@@ -444,14 +413,9 @@ def addSongRating(user,discussionId,songId,body):
         author,
         discussion,
         song
-      ) VALUES (
-        {rating},
-        {author_id},
-        {discussion_id},
-        {song_id}
-      );
+      ) VALUES (?,?,?,?);
     """
-    cursor.execute(sql_query)
+    cursor.execute(sql_query,[rating,author_id,discussion_id,song_id])
     response = cursor.rowcount
     if response < 1:
       return "Database Error", 500

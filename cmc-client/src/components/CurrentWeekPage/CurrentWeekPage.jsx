@@ -69,7 +69,7 @@ export default function CurrentWeekPage({authHeader}) {
   })
 
   // Add Empty Option
-  activeDiscussionDropdown.unshift(<option key='0' value=''></option>)
+  activeDiscussionDropdown.unshift(<option key='0' value=''>Select a Discussion</option>)
 
   return (
     <div id="current-week">

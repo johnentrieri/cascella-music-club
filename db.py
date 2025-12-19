@@ -147,7 +147,7 @@ def create_comment_table():
     sql_query = f"""
     CREATE TABLE IF NOT EXISTS comments (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      comment VARCHAR(255) NOT NULL,
+      comment TEXT NOT NULL,
       created_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
       author INT,
       discussion INT,

@@ -74,8 +74,9 @@ export default function CommentPanel({authHeader,discussionId,comments,onRefresh
 
       { isLoggedIn &&
         <div className="comment-input">
-          <input
+          <textarea
             type="text"
+            rows={3}
             value={userComment}
             onChange={ (event) => setUserComment(event.target.value)}
           />
