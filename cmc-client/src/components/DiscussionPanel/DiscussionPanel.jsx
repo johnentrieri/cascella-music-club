@@ -63,7 +63,7 @@ export default function DiscussionPanel({authHeader, discussionId}) {
   if (discussionData) {
     songTiles = discussionData.songs.map( (song) => {
       return(
-        <SongTile
+        <SongTile key={song.id}
           authHeader={authHeader}
           songData={song}
           onRefreshNeeded={refreshDiscussionData}

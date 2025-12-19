@@ -93,7 +93,7 @@ export default function AdminPanel({authHeader}) {
   if (keyData) {
     keyRows = keyData.map( (entry) => {
       return(
-        <tr>
+        <tr key={entry.userkey}>
           <td>{entry.userkey}</td>
           <td>{entry.is_claimed ? "Yes" : "No"}</td>
           <td className='hide-on-mobile'>{entry.claimed_by}</td>

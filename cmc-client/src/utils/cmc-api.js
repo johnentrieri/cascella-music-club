@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_URL = 'http://localhost:4000';
+const VITE_CMC_API_URL = import.meta.env.VITE_CMC_API_URL;
 
 // Login User
 export async function loginUser(authHeader) {
-  const response = await axios.get(`${API_URL}/user/login`, {
+  const response = await axios.get(`${VITE_CMC_API_URL}/user/login`, {
     headers:{'Authorization': authHeader},
     validateStatus: (status) => { return status < 500; }
   })
@@ -17,7 +17,7 @@ export async function loginUser(authHeader) {
 
 // Register User
 export async function registerUser(userkey, username, email, password) {
-  const response = await axios.post(`${API_URL}/user`, 
+  const response = await axios.post(`${VITE_CMC_API_URL}/user`, 
     {
       userkey : userkey,
       username : username,
@@ -40,7 +40,7 @@ export async function registerUser(userkey, username, email, password) {
 
 // Get User Keys
 export async function getUserKeys(authHeader) {
-  const response = await axios.get(`${API_URL}/userkey`, {
+  const response = await axios.get(`${VITE_CMC_API_URL}/userkey`, {
     headers:{'Authorization': authHeader},
     validateStatus: (status) => { return status < 500; }
   })
@@ -53,7 +53,7 @@ export async function getUserKeys(authHeader) {
 
 // Generate User Keys
 export async function generateUserKey(authHeader) {
-  const response = await axios.post(`${API_URL}/userkey`, {}, {
+  const response = await axios.post(`${VITE_CMC_API_URL}/userkey`, {}, {
     headers:{'Authorization': authHeader},
     validateStatus: (status) => { return status < 500; }
   })
@@ -66,7 +66,7 @@ export async function generateUserKey(authHeader) {
 
 // Get Users
 export async function getUsers() {
-  const response = await axios.get(`${API_URL}/user`, {
+  const response = await axios.get(`${VITE_CMC_API_URL}/user`, {
     validateStatus: (status) => { return status < 500; }
   })
   .catch( (error) => {
@@ -78,7 +78,7 @@ export async function getUsers() {
 
 // Create Discussion
 export async function createDiscussion(authHeader,discussionData) {
-  const response = await axios.post(`${API_URL}/discussion`, 
+  const response = await axios.post(`${VITE_CMC_API_URL}/discussion`, 
     discussionData,
     {
       headers:{
@@ -97,7 +97,7 @@ export async function createDiscussion(authHeader,discussionData) {
 
 // Get Discussions
 export async function getDiscussions() {
-  const response = await axios.get(`${API_URL}/discussion`, {
+  const response = await axios.get(`${VITE_CMC_API_URL}/discussion`, {
     validateStatus: (status) => { return status < 500; }
   })
   .catch( (error) => {
@@ -109,7 +109,7 @@ export async function getDiscussions() {
 
 // Get Discussion By Id
 export async function getDiscussionById(discussionId) {
-  const response = await axios.get(`${API_URL}/discussion/${discussionId}`, {
+  const response = await axios.get(`${VITE_CMC_API_URL}/discussion/${discussionId}`, {
     validateStatus: (status) => { return status < 500; }
   })
   .catch( (error) => {
@@ -121,7 +121,7 @@ export async function getDiscussionById(discussionId) {
 
 // Rate Artist
 export async function rateArtist(authHeader, discussionId, rating) {
-  const response = await axios.post(`${API_URL}/discussion/${discussionId}/rate`,
+  const response = await axios.post(`${VITE_CMC_API_URL}/discussion/${discussionId}/rate`,
     {rating : rating},
     {
       headers:{
@@ -140,7 +140,7 @@ export async function rateArtist(authHeader, discussionId, rating) {
 
 // Add Artist Comment
 export async function addArtistComment(authHeader, discussionId, comment) {
-  const response = await axios.post(`${API_URL}/discussion/${discussionId}/comment`,
+  const response = await axios.post(`${VITE_CMC_API_URL}/discussion/${discussionId}/comment`,
     {comment : comment},
     {
       headers:{
@@ -159,7 +159,7 @@ export async function addArtistComment(authHeader, discussionId, comment) {
 
 // Rate Song
 export async function rateSong(authHeader, discussionId, songId, rating) {
-  const response = await axios.post(`${API_URL}/discussion/${discussionId}/${songId}/rate`,
+  const response = await axios.post(`${VITE_CMC_API_URL}/discussion/${discussionId}/${songId}/rate`,
     {rating : rating},
     {
       headers:{
@@ -178,7 +178,7 @@ export async function rateSong(authHeader, discussionId, songId, rating) {
 
 // Add Song Comment
 export async function addSongComment(authHeader, discussionId, songId, comment) {
-  const response = await axios.post(`${API_URL}/discussion/${discussionId}/${songId}/comment`,
+  const response = await axios.post(`${VITE_CMC_API_URL}/discussion/${discussionId}/${songId}/comment`,
     {comment : comment},
     {
       headers:{

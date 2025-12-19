@@ -18,7 +18,7 @@ export default function CommentPanel({authHeader,discussionId,comments,onRefresh
   // Map to comment boxes
   const commentElements = comments.map( (comment) => {
     return(
-      <Comment commentData={comment} />
+      <Comment key={comment.id} commentData={comment} />
     );
   });
 

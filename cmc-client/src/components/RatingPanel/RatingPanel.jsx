@@ -13,7 +13,7 @@ export default function RatingPanel({authHeader,discussionId,ratings,onRefreshNe
 
   const ratingRows = ratings.map( (rating) => {
     return(
-      <tr>
+      <tr key={rating.id}>
         <td>{rating.author}</td>
         <td>{rating.rating}</td>
       </tr>
